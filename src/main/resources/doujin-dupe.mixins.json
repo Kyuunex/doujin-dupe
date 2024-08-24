@@ -1,11 +1,13 @@
 {
   "required": true,
-  "package": "com.example.addon.mixin",
+  "package": "moe.kyuunex.doujin_dupe.mixin",
   "compatibilityLevel": "JAVA_21",
   "client": [
-    "ExampleMixin"
   ],
   "injectors": {
     "defaultRequire": 1
-  }
+  },
+  "mixins": [
+    "ClientConnectionMixin"
+  ]
 }

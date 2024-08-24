@@ -1,5 +1,5 @@
 plugins {
-    id "fabric-loom" version "1.7-SNAPSHOT"
+    id "fabric-loom" version "1.6-SNAPSHOT"
 }
 
 base {
@@ -27,6 +27,10 @@ dependencies {
 
     // Meteor
     modImplementation "meteordevelopment:meteor-client:${project.meteor_version}"
+}
+
+loom {
+    accessWidenerPath = file("src/main/resources/doujin-dupe.accesswidener")
 }
 
 tasks {

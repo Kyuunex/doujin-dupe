@@ -1,31 +1,32 @@
 {
   "schemaVersion": 1,
-  "id": "addon-template",
+  "id": "doujin-dupe",
   "version": "${version}",
-  "name": "Addon Template",
-  "description": "An addon template for Meteor Client addons.",
+  "name": "DoujinDupe",
+  "description": "An automation to the 1.20.5+ Book dupe.",
   "authors": [
-    "seasnail"
+    "Kyuunex"
   ],
   "contact": {
-    "repo": "https://github.com/MeteorDevelopment/meteor-addon-template"
+    "repo": "https://github.com/Kyuunex/doujin-dupe"
   },
   "icon": "assets/template/icon.png",
   "environment": "client",
   "entrypoints": {
     "meteor": [
-      "com.example.addon.AddonTemplate"
+      "moe.kyuunex.doujin_dupe.DoujinDupeAddon"
     ]
   },
   "mixins": [
-    "addon-template.mixins.json"
+    "doujin-dupe.mixins.json"
   ],
+  "accessWidener": "doujin-dupe.accesswidener",
   "custom": {
     "meteor-client:color": "225,25,25"
   },
   "depends": {
     "java": ">=21",
-    "minecraft": ["${mc_version}"],
+    "minecraft": ["1.21.1", "1.21", "1.20.6", "1.20.5"],
     "meteor-client": "*"
   }
 }
