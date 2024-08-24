@@ -1,4 +1,4 @@
-# Meteor Addon Template
+# Doujin Dupe
 
 An automation to the 1.20.5+ Book dupe. Patched in Paper 1.21.1 build 36.  
 
