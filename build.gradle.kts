@@ -29,6 +29,10 @@ dependencies {
     modImplementation("meteordevelopment:meteor-client:${properties["meteor_version"] as String}-SNAPSHOT")
 }
 
+loom {
+    accessWidenerPath.set(project.file("src/main/resources/doujin-dupe.accesswidener"))
+}
+
 tasks {
     processResources {
         val propertyMap = mapOf(
