@@ -11,12 +11,12 @@ import meteordevelopment.meteorclient.systems.modules.Module;
 import meteordevelopment.meteorclient.utils.player.FindItemResult;
 import meteordevelopment.meteorclient.utils.player.InvUtils;
 import meteordevelopment.orbit.EventHandler;
-import net.minecraft.client.network.ClientPlayNetworkHandler;
-import net.minecraft.item.Item;
-import net.minecraft.item.Items;
-import net.minecraft.network.packet.c2s.play.BookUpdateC2SPacket;
-import net.minecraft.network.ClientConnection;
-import net.minecraft.network.packet.Packet;
+import net.minecraft.client.multiplayer.ClientPacketListener;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
+import net.minecraft.network.protocol.game.ServerboundEditBookPacket;
+import net.minecraft.network.Connection;
+import net.minecraft.network.protocol.Packet;
 
 public class DoujinDupe extends Module {
     private int idleTimer = 0;
@@ -122,7 +122,7 @@ public class DoujinDupe extends Module {
 
     @EventHandler
     public void onTick(TickEvent.Post tickEvent) {
-        if (mc.player == null || mc.interactionManager == null) {
+        if (mc.player == null || mc.gameMode == null) {
             return;
         }
 
@@ -130,7 +130,7 @@ public class DoujinDupe extends Module {
 
         if (idleTimer > 0) return;
 
-        if (mc.player.getOffHandStack().getItem() != Items.WRITABLE_BOOK && bookCheck.get()) {
+        if (mc.player.getOffhandItem().getItem() != Items.WRITABLE_BOOK && bookCheck.get()) {
             warning("No writable book in offhand, disabling.");
             toggle();
             return;
@@ -156,7 +156,7 @@ public class DoujinDupe extends Module {
     }
 
     public void writeDoujin() {
-        sendPacket(new BookUpdateC2SPacket(
+        sendPacket(new ServerboundEditBookPacket(
             40,
             List.of("A"),
             Optional.of(randomText(33)))
@@ -176,10 +176,10 @@ public class DoujinDupe extends Module {
     }
 
     public void sendPacket(Packet<?> packet) {
-        ClientPlayNetworkHandler network = mc.getNetworkHandler();
+        ClientPacketListener network = mc.getConnection();
         if (network == null) return;
 
-        ClientConnection connection = network.getConnection();
+        Connection connection = network.getConnection();
         if (connection == null) return;
 
         connection.channel.writeAndFlush(packet);
