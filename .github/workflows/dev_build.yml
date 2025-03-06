@@ -18,8 +18,8 @@ jobs:
               uses: marvinpinto/action-automatic-releases@latest
               with:
                   repo_token: '${{ secrets.GITHUB_TOKEN }}'
-                  automatic_release_tag: devbuild-1.21.1
+                  automatic_release_tag: devbuild-1.20.6
                   prerelease: false
-                  title: Dev Build (1.21.1)
+                  title: Dev Build (1.20.6)
                   files: |
                       ./build/libs/*.jar
