@@ -10,7 +10,7 @@
   "contact": {
     "repo": "https://github.com/Kyuunex/doujin-dupe"
   },
-  "icon": "assets/template/icon.png",
+  "icon": "assets/icon.png",
   "environment": "client",
   "entrypoints": {
     "meteor": [
