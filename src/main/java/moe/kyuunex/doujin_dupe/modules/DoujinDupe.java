@@ -179,9 +179,6 @@ public class DoujinDupe extends Module {
         ClientPacketListener network = mc.getConnection();
         if (network == null) return;
 
-        Connection connection = network.getConnection();
-        if (connection == null) return;
-
-        connection.channel.writeAndFlush(packet);
+        network.getConnection().channel.writeAndFlush(packet);
     }
 }
