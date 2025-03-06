@@ -17,7 +17,6 @@
       "moe.kyuunex.doujin_dupe.DoujinDupeAddon"
     ]
   },
-  "accessWidener": "doujin-dupe.accesswidener",
   "custom": {
     "meteor-client:color": "225,25,25"
   },
