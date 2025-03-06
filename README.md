@@ -2,7 +2,7 @@
 
 An automation to the 1.20.5+ Book dupe. Patched in Paper 1.21.1 build 36.  
 
-Thanks to Kurine for finding this dupe!
+Thanks to Kurine for finding this dupe and coding the module!
 
 ### How to use
 
