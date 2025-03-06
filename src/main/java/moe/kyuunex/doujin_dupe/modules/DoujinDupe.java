@@ -4,16 +4,14 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
-import static meteordevelopment.meteorclient.MeteorClient.mc;
-
 import moe.kyuunex.doujin_dupe.DoujinDupeAddon;
 import meteordevelopment.meteorclient.events.world.TickEvent;
 import meteordevelopment.meteorclient.settings.*;
 import meteordevelopment.meteorclient.systems.modules.Module;
-import meteordevelopment.meteorclient.utils.network.PacketUtils;
 import meteordevelopment.meteorclient.utils.player.FindItemResult;
 import meteordevelopment.meteorclient.utils.player.InvUtils;
 import meteordevelopment.orbit.EventHandler;
+import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.network.packet.c2s.play.BookUpdateC2SPacket;
@@ -98,7 +96,7 @@ public class DoujinDupe extends Module {
                 .build());
 
     public DoujinDupe() {
-        super(DoujinDupeAddon.CATEGORY, "doujin-dupe", "An automation to doujin dupe.");
+        super(DoujinDupeAddon.CATEGORY, "doujin-dupe", "An automation to 1.20.6-1.21.1 book dupe.");
     }
 
     @Override
@@ -107,7 +105,7 @@ public class DoujinDupe extends Module {
         if (cycle.get() && cycleCount == cycles.get()) {
             if (this.isActive()) {
                 cycleCount = 0;
-                info("Finished " + cycles.get() + " cycles, disabling.");
+                info("Finished %s cycles, disabling.", cycles.get());
                 this.toggle();
             }
         }
@@ -158,10 +156,11 @@ public class DoujinDupe extends Module {
     }
 
     public void writeDoujin() {
-        send_packet(new BookUpdateC2SPacket(
+        sendPacket(new BookUpdateC2SPacket(
             40,
             List.of("A"),
-            Optional.of(randomText(33))));
+            Optional.of(randomText(33)))
+        );
     }
 
     public static String randomText(int amount) {
@@ -176,14 +175,12 @@ public class DoujinDupe extends Module {
         return str.toString();
     }
 
-    public void send_packet(Packet<?> packet) {
-        if (mc.getNetworkHandler() == null) return;
+    public void sendPacket(Packet<?> packet) {
+        ClientPlayNetworkHandler network = mc.getNetworkHandler();
+        if (network == null) return;
 
-        ClientConnection connection = mc.getNetworkHandler().getConnection();
-        if (connection == null) {
-            DoujinDupeAddon.LOG.error("Connection is null");
-            return;
-        }
+        ClientConnection connection = network.getConnection();
+        if (connection == null) return;
 
         connection.channel.writeAndFlush(packet);
     }

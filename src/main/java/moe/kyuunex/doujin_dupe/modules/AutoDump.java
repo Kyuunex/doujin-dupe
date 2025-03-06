@@ -5,7 +5,6 @@ import java.util.List;
 import moe.kyuunex.doujin_dupe.DoujinDupeAddon;
 import meteordevelopment.meteorclient.events.world.TickEvent;
 import meteordevelopment.meteorclient.settings.*;
-import meteordevelopment.meteorclient.systems.modules.Categories;
 import meteordevelopment.meteorclient.systems.modules.Module;
 import meteordevelopment.meteorclient.utils.player.InvUtils;
 import meteordevelopment.meteorclient.utils.player.SlotUtils;
@@ -40,7 +39,11 @@ public class AutoDump extends Module {
                 .build());
 
     public AutoDump() {
-        super(DoujinDupeAddon.CATEGORY, "auto-dump", "Automatically dump items into chests, skid of meteors but won't time you out.");
+        super(
+            DoujinDupeAddon.CATEGORY,
+            "auto-dump",
+            "Automatically dump items into chests, skid of meteor's but won't time you out."
+        );
     }
 
     @EventHandler
